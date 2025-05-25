@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cantantes</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<h2>Cantantes</h2>
+<a th:href="@{/cantantes/nuevo}">+ Nuevo Cantante</a>
+<table>
+    <tr><th>Nombre</th><th>Nacionalidad</th><th>Acciones</th></tr>
+    <tr th:each="c : ${cantantes}">
+        <td th:text="${c.nombre}"></td>
+        <td th:text="${c.nacionalidad}"></td>
+        <td>
+            <a th:href="@{/cantantes/editar/{id}(id=${c.id})}">Editar</a> |
+            <a th:href="@{/cantantes/eliminar/{id}(id=${c.id})}">Eliminar</a>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

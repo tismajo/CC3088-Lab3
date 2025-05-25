@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Géneros</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<h2>Géneros</h2>
+<a th:href="@{/generos/nuevo}">+ Nuevo Género</a>
+<table>
+    <tr><th>Nombre</th><th>Acciones</th></tr>
+    <tr th:each="g : ${generos}">
+        <td th:text="${g.nombre}"></td>
+        <td>
+            <a th:href="@{/generos/editar/{id}(id=${g.id})}">Editar</a> |
+            <a th:href="@{/generos/eliminar/{id}(id=${g.id})}">Eliminar</a>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playlists</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<h2>Playlists</h2>
+<a th:href="@{/playlists/nuevo}">+ Nueva Playlist</a>
+<table>
+    <tr>
+        <th>Nombre</th>
+        <th>Estado Ánimo</th>
+        <th>Canciones</th>
+        <th>Acciones</th>
+    </tr>
+    <tr th:each="p : ${playlists}">
+        <td th:text="${p.nombre}"></td>
+        <td th:text="${p.estadoAnimo}"></td>
+        <td>
+            <ul>
+                <li th:each="c : ${p.canciones}" th:text="${c.titulo}"></li>
+            </ul>
+        </td>
+        <td>
+            <a th:href="@{/playlists/editar/{id}(id=${p.id})}">Editar</a> |
+            <a th:href="@{/playlists/eliminar/{id}(id=${p.id})}">Eliminar</a>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>

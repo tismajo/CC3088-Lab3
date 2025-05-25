@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario Género</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<h2 th:text="${genero.id == null} ? 'Nuevo Género' : 'Editar Género'"></h2>
+<form th:action="${genero.id == null} ? @{/generos} : @{/generos/editar/{id}(id=${genero.id})}" 
+      th:object="${genero}" method="post">
+    <label>Nombre:</label><input th:field="*{nombre}" /><br/>
+    <button type="submit">Guardar</button>
+</form>
+</body>
+</html>

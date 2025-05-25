@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario Cantante</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<h2 th:text="${cantante.id == null} ? 'Nuevo Cantante' : 'Editar Cantante'"></h2>
+<form th:action="${cantante.id == null} ? @{/cantantes} : @{/cantantes/editar/{id}(id=${cantante.id})}" 
+      th:object="${cantante}" method="post">
+    <label>Nombre:</label><input th:field="*{nombre}" /><br/>
+    <label>Nacionalidad:</label><input th:field="*{nacionalidad}" /><br/>
+    <label>Fecha de nacimiento:</label><input type="date" th:field="*{fechaNacimiento}" /><br/>
+    <button type="submit">Guardar</button>
+</form>
+</body>
+</html>

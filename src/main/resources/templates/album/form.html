@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario Álbum</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<h2 th:text="${album.id == null} ? 'Nuevo Álbum' : 'Editar Álbum'"></h2>
+<form th:action="${album.id == null} ? @{/albums} : @{/albums/editar/{id}(id=${album.id})}" 
+      th:object="${album}" method="post">
+    <label>Nombre:</label>
+    <input th:field="*{nombre}" /><br/>
+
+    <label>Año:</label>
+    <input th:field="*{anio}" /><br/>
+
+    <label>Cantante:</label>
+    <select th:field="*{cantante.id}" required>
+        <option th:each="c : ${cantantes}" 
+                th:value="${c.id}" 
+                th:text="${c.nombre}">Cantante
+        </option>
+    </select><br/>
+
+    <button type="submit">Guardar</button>
+</form>
+
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario Playlist</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<h2 th:text="${playlist.id == null} ? 'Nueva Playlist' : 'Editar Playlist'"></h2>
+
+<form th:action="${playlist.id == null} ? @{/playlists} : @{/playlists/editar/{id}(id=${playlist.id})}"
+      th:object="${playlist}" method="post">
+    <label>Nombre:</label><input type="text" th:field="*{nombre}" /><br/>
+    <label>Descripción:</label><input type="text" th:field="*{descripcion}" /><br/>
+    <label>Estado Ánimo:</label>
+    <select th:field="*{estadoAnimo}">
+        <option th:each="estado : ${T(com.uvg.laboratorio3.model.EstadoAnimoEnumModel).values()}"
+                th:value="${estado}" th:text="${estado}"></option>
+    </select><br/>
+    <label>Canciones:</label><br/>
+    <select th:field="*{canciones}" multiple size="10">
+        <option th:each="c : ${canciones}" th:value="${c.id}" th:text="${c.titulo}"></option>
+    </select><br/>
+    <button type="submit">Guardar</button>
+</form>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario Canción</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<h2 th:text="${cancion.id == null} ? 'Nueva Canción' : 'Editar Canción'"></h2>
+
+<form th:action="${cancion.id == null} ? @{/canciones} : @{/canciones/editar/{id}(id=${cancion.id})}" 
+      th:object="${cancion}" method="post">
+
+    <label>Título:</label>
+    <input th:field="*{titulo}" /><br/>
+
+    <label>Formato:</label>
+    <select th:field="*{formato}">
+        <option th:each="f : ${T(com.uvg.laboratorio3.model.FormatoAudioEnumModel).values()}"
+                th:value="${f}" th:text="${f}"></option>
+    </select><br/>
+
+    <label>Duración:</label><br/>
+    Horas:
+    <select name="horas">
+        <option th:each="i : ${#numbers.sequence(0,5)}" th:value="${i}" th:text="${i}">0</option>
+    </select>
+
+    Minutos:
+    <select name="minutos">
+        <option th:each="i : ${#numbers.sequence(0,59)}" th:value="${i}" th:text="${i}">0</option>
+    </select>
+
+    Segundos:
+    <select name="segundos">
+        <option th:each="i : ${#numbers.sequence(0,59)}" th:value="${i}" th:text="${i}">0</option>
+    </select>
+    <br/>
+
+    <label>Álbum:</label>
+    <select name="albumId">
+        <option th:each="a : ${albums}" th:value="${a.id}" th:text="${a.nombre}"></option>
+    </select><br/>
+
+    <label>Cantante:</label>
+    <select name="cantante.id" id="cantante" required>
+        <option value="">Seleccione un cantante</option>
+        <option th:each="c : ${cantantes}" th:value="${c.id}" th:text="${c.nombre}"></option>
+    </select><br/>
+
+    <label>Álbum:</label>
+    <select name="album.id" id="album" required>
+        <option value="">Seleccione un álbum</option>
+        <option th:each="a : ${albums}" th:value="${a.id}" th:text="${a.nombre}"></option>
+    </select><br/>
+
+    <label>Género:</label>
+    <select name="genero.id" required>
+        <option value="">Seleccione un género</option>
+        <option th:each="g : ${generos}" th:value="${g.id}" th:text="${g.nombre}"></option>
+    </select><br/>
+
+    <button type="submit">Guardar</button>
+</form>
+</body>
+</html>

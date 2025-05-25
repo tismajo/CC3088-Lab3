@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canciones</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<h2>Canciones</h2>
+<a th:href="@{/canciones/nuevo}">+ Nueva Canción</a>
+<table>
+    <tr>
+        <th>Título</th>
+        <th>Formato</th>
+        <th>Duración</th>
+        <th>Álbum</th>
+        <th>Cantante</th>
+        <th>Género</th>
+        <th>Acciones</th>
+    </tr>
+    <tr th:each="c : ${canciones}">
+        <td th:text="${c.titulo}"></td>
+        <td th:text="${c.formato}"></td>
+        <td th:text="${c.tiempoDuracionStr}"></td>
+        <td th:text="${c.album != null ? c.album.nombre : 'Sin asignar'}"></td>
+        <td th:text="${c.cantante != null ? c.cantante.nombre : 'Sin asignar'}"></td>
+        <td th:text="${c.genero != null ? c.genero.nombre : 'Sin asignar'}"></td>
+        <td>
+            <a th:href="@{/canciones/editar/{id}(id=${c.id})}">Editar</a> |
+            <a th:href="@{/canciones/eliminar/{id}(id=${c.id})}">Eliminar</a>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

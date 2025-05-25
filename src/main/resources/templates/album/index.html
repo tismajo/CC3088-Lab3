@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Álbumes</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+</head>
+<body>
+<h2>Álbumes</h2>
+<a th:href="@{/albums/nuevo}">+ Nuevo Álbum</a>
+<table>
+    <tr><th>Nombre</th><th>Año</th><th>Cantante</th><th>Acciones</th></tr>
+    <tr th:each="a : ${albums}">
+        <td th:text="${a.nombre}"></td>
+        <td th:text="${a.anio}"></td>
+        <td th:text="${a.cantante?.nombre} ?: 'Sin cantante'"></td>
+        <td>
+            <a th:href="@{/albums/editar/{id}(id=${a.id})}">Editar</a> |
+            <a th:href="@{/albums/eliminar/{id}(id=${a.id})}">Eliminar</a>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
